@@ -64,7 +64,9 @@ describe('datas', () => {
 
   it('aceita só mês válido no parâmetro', () => {
     expect(mesOuAtual('2026-02', VIRADA)).toBe('2026-02');
-    for (const p of ['abc', '2026-13', ['2026-02'], undefined]) expect(mesOuAtual(p, VIRADA)).toBe('2026-11');
+    for (const p of ['abc', '2026-13', '0026-11', '9999-12', ['2026-02'], undefined]) {
+      expect(mesOuAtual(p, VIRADA)).toBe('2026-11');
+    }
   });
 
   it('soma meses e nomeia o mês', () => {
