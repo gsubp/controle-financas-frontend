@@ -20,9 +20,10 @@ export async function lerToken(): Promise<string | undefined> {
 
 /**
  * Sessão recusada pela API (token vencido ou forjado).
- * Em Server Action o cookie pode ser apagado aqui mesmo; um redirect de action para a rota /sair
- * vira navegação do router, que não abre Route Handler e trava. Em Server Component o Next proíbe
- * alterar cookies (delete lança), então a rota /sair apaga.
+ * Em Server Action o cookie é apagado aqui mesmo. Não usar redirect('/sair') a partir de action: o Next
+ * pré-renderiza o destino no servidor ainda com o cookie antigo e entra em ciclo
+ * /sair → /login → / → 401 → /sair até o limite de redirects (~20 s travado).
+ * Em Server Component o Next proíbe alterar cookies (delete lança), então a rota /sair apaga.
  */
 export async function encerrarSessao(): Promise<never> {
   try {

@@ -1,7 +1,7 @@
 'use client';
 
 import Link from 'next/link';
-import { useActionState, useState } from 'react';
+import { startTransition, useActionState, useState, type FormEvent } from 'react';
 import { formatarValorCampo, nomeMes } from '@/lib/formato';
 import { CATEGORIAS, type EstadoForm, type Lancamento, type Tipo } from '@/lib/tipos';
 import { salvarLancamento } from './actions';
@@ -25,11 +25,18 @@ export function FormLancamento({ lancamento, hoje }: { lancamento?: Lancamento; 
     setTipo(t);
     setCategoria(CATEGORIAS[t][0]);
   };
+  // Sem <form action>: o React 19 reinicia o form após a action e o <select> controlado volta à opção
+  // inicial na tela (e no próximo envio), enquanto o estado ainda guarda a escolha do usuário.
+  const enviar = (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    const fd = new FormData(e.currentTarget);
+    startTransition(() => acao(fd));
+  };
   const mesDaData = /^\d{4}-\d{2}/.test(data) ? data.slice(0, 7) : null;
   const voltar = `/lancamentos?mes=${(lancamento?.data ?? hoje).slice(0, 7)}`;
 
   return (
-    <form action={acao}
+    <form onSubmit={enviar}
       className="mx-auto flex w-full max-w-[560px] flex-col gap-[22px] rounded-2xl border border-borda bg-superficie px-6 py-7 sm:px-8">
       <input type="hidden" name="id" value={lancamento?.id ?? ''} />
       <input type="hidden" name="tipo" value={tipo} />

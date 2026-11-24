@@ -71,7 +71,7 @@ export function ListaLancamentos({ lancamentos, mes }: { lancamentos: Lancamento
           className="flex gap-0.5 rounded-xl border border-borda bg-superficie p-[3px]">
           {SEGMENTOS.map((s) => (
             <button key={s.valor} type="button" aria-pressed={tipo === s.valor} onClick={() => setTipo(s.valor)}
-              className={`h-10 min-w-11 cursor-pointer rounded-[9px] px-4 text-sm font-semibold ${
+              className={`h-11 min-w-11 cursor-pointer rounded-[9px] px-4 text-sm font-semibold ${
                 tipo === s.valor ? 'bg-tinta text-white' : 'text-suave hover:text-tinta'
               }`}>
               {s.rotulo}
