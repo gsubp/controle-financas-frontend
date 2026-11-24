@@ -2,6 +2,9 @@ export type Tipo = 'RECEITA' | 'DESPESA';
 
 export type Usuario = { id: string; nome: string; email: string };
 
+/** Estado devolvido pelas Server Actions de formulário; `valores` repõe o que foi digitado após um erro. */
+export type EstadoForm = { erro?: string; valores?: Record<string, string> };
+
 export type Lancamento = {
   id: string;
   tipo: Tipo;
