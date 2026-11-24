@@ -21,7 +21,8 @@ export function PorCategoria({ resumo }: { resumo: Resumo }) {
                 <span className="font-medium">{c.categoria}</span>
                 <span className="whitespace-nowrap">
                   <span className="font-semibold">{formatarMoeda(c.totalCentavos)}</span>
-                  <span className="inline-block w-[52px] text-right text-suave">{formatarPercentual(c.percentual)}</span>
+                  {/* w-16 cabe "100,0%"; mais estreito, o texto transborda e cola no valor. */}
+                  <span className="inline-block w-16 text-right text-suave">{formatarPercentual(c.percentual)}</span>
                 </span>
               </div>
               <div className="h-2 overflow-hidden rounded-full bg-trilho">

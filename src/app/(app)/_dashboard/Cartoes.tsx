@@ -52,7 +52,11 @@ export function Cartoes({ resumo, mesAnterior }: { resumo: Resumo; mesAnterior: 
               style={{ width: `${Math.min(100, Math.max(0, taxa ?? 0))}%` }} />
           </div>
           <span className="text-[13px] text-suave">
-            {taxa === null ? 'Sem receitas no mês' : 'das receitas do mês não foi gasto'}
+            {taxa === null
+              ? 'Sem receitas no mês'
+              : taxa < 0
+                ? 'gasto acima das receitas do mês'
+                : 'das receitas do mês não foi gasto'}
           </span>
         </div>
       </div>
