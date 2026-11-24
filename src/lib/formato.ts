@@ -9,7 +9,8 @@ const DIA_SP = new Intl.DateTimeFormat('en-CA', {
   month: '2-digit',
   day: '2-digit',
 });
-const MES_REGEX = /^\d{4}-(0[1-9]|1[0-2])$/;
+// Mesma faixa da API (1900–2099).
+const MES_REGEX = /^(19|20)\d{2}-(0[1-9]|1[0-2])$/;
 const MAX_CENTAVOS = 2_000_000_000;
 const MESES = [
   'janeiro', 'fevereiro', 'março', 'abril', 'maio', 'junho',

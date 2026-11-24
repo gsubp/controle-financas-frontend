@@ -1,5 +1,4 @@
-import { redirect } from 'next/navigation';
-import { lerToken } from './sessao';
+import { encerrarSessao, lerToken } from './sessao';
 
 export class ErroApi extends Error {
   constructor(
@@ -23,8 +22,8 @@ export async function api<T>(caminho: string, init: RequestInit & { semToken?: b
     headers: { 'Content-Type': 'application/json', ...(token && { Authorization: `Bearer ${token}` }) },
   });
 
-  // Token vencido ou inválido: /sair apaga o cookie (Server Components não podem) e manda para /login.
-  if (res.status === 401 && token) redirect('/sair');
+  // Token vencido ou inválido: apaga o cookie e manda para /login (ver encerrarSessao).
+  if (res.status === 401 && token) await encerrarSessao();
   if (res.status === 204) return undefined as T;
 
   const corpo = await res.json().catch(() => ({}));
