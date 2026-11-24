@@ -1,0 +1,36 @@
+@import "tailwindcss";
+
+/* Tokens do canvas aprovado. */
+@theme {
+  --color-fundo: #f5f6f4;
+  --color-superficie: #ffffff;
+  --color-tinta: #16181d;
+  --color-suave: #5b616e;
+  --color-suave-escuro: #b8bdc7;
+  --color-borda: #e2e4e7;
+  --color-borda-campo: #cdd1d6;
+  --color-linha: #eef0f2;
+  --color-ativo: #eef0ee;
+  --color-trilho: #f3eeea;
+  --color-receita: #2b5fd9;
+  --color-receita-texto: #1f4fb8;
+  --color-receita-fundo: #e8eefb;
+  --color-despesa: #d9701f;
+  --color-despesa-texto: #9a3f08;
+  --color-despesa-fundo: #fbede3;
+}
+
+@theme inline {
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  --font-display: var(--font-space-grotesk), ui-sans-serif, system-ui, sans-serif;
+}
+
+body {
+  @apply bg-fundo text-tinta font-sans antialiased;
+  font-variant-numeric: tabular-nums;
+}
+
+:where(a, button, input, select):focus-visible {
+  outline: 2px solid var(--color-receita);
+  outline-offset: 2px;
+}
